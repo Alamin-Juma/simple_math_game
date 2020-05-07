@@ -7,11 +7,13 @@ var correctAnswer;
 
 //the user clicks on the start/reset
 document.getElementById("start").onclick = function(){
+    startTime();
 
     //if the user is playing
     if (playing == true){
         //reload page
         location.reload(); 
+        
     }
     //if the user is not playing
     else
@@ -29,7 +31,7 @@ document.getElementById("start").onclick = function(){
         show("time");
 
         //30 seconds timer
-        timeRemaining = 30;
+        timeRemaining = 60;
         document.getElementById("remainingTime").innerHTML=timeRemaining;
 
         //hide game over box
@@ -105,6 +107,7 @@ function startCountdown(){
             hide("wrong");
             playing=false;
             document.getElementById("start").innerHTML = "Start Game";
+            
         }
     },1000);
 }
@@ -122,7 +125,7 @@ function generateQA(){
     //to fill on if the random answer boxes with the right answer
     document.getElementById("answer"+answerBox).innerHTML=correctAnswer; 
 
-    //storing answer choices;    
+3    //storing answer choices;    
     var answers=[correctAnswer];
 
     //to fill the other answer boxes with the wrong answers   
@@ -158,6 +161,28 @@ function hide(id){
 function show(id){      
     document.getElementById(id).style.display="block";      
 }    
+function checkTime(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+  
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('gameTime').innerHTML = h + ":" + m + ":" + s;
+    t = setTimeout(function() {
+      startTime()
+    }, 500);
+  }
 
+
+  
 
 
